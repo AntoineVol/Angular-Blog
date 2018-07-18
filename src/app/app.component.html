@@ -1,0 +1,42 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">NgBlog</a>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="" (click)="showList = !showList">Liste <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" (click)="showList = !showList">Form</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Contact</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        Bienvenu dans la blogosphère...
+      </span>
+    </div>
+  </nav>
+  <div style="text-align:center">
+    <h1 class="font-weight-bold shadow p-3 mb-5 bg-white rounded">
+        <img src="../assets/tent.svg" class="logo" alt="logoTent"/>
+      {{ title }}
+      <img src="../assets/bonfire.svg" class="logo" alt="logoFire"/>
+    </h1>
+  </div>
+</header>
+<!-- Liste des articles -->
+<section>
+  <app-list-articles [articles]="articles" *ngIf="showList ; else showFormTpl" (onDelete)="handleDelete($event)" (onEdit)="showEdit($event)"></app-list-articles>
+</section>
+
+<!-- Formulaire d'edition -->
+<ng-template #showFormTpl>
+  <app-edit-article [article]="editArticle" (onCreate)="handleCreate($event)" (onEdit)="handleEdit($event)"></app-edit-article>
+</ng-template>
+
+
+

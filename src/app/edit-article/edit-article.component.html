@@ -1,0 +1,15 @@
+<form #blogForm=ngForm class="container-fluid" (ngSubmit)="submit(blogForm)">
+  <legend>Ajouter un article</legend>
+  <hr>
+  <div class="Form-group">
+    <label for="title">Titre de l'article</label>
+    <input type="text" name="title" id="title" [(ngModel)]="model.title" class="form-control" placeholder="Nom de l'aventurier" required/>
+  </div>
+  <div class="Form-group">
+    <label for="content">Contenu</label>
+    <textarea name="content" id="content" [(ngModel)]="model.content" class="form-control" placeholder="Description de l'aventurier" required></textarea>
+  </div>
+  <div class="Form-group">
+    <button class="btn btn-success">Publier</button>
+  </div>
+</form>
