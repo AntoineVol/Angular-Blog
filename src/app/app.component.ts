@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Article } from './article';
-import { ARTICLES } from './mock-articles'
 import { ArticleService } from './article.service';
 
 @Component({
@@ -22,28 +21,41 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.articleService.articles.subscribe((result)=>this.articles=result);
-    this.articleService.loadMock();
+    this.articleService.list().subscribe((list)=>this.articles=list)
   }
 
   handleCreate(article:Article){
-    this.articles.push(article);
+    this.articleService.create(article).subscribe({
+      error:(errorMessage)=> console.log(`Impossible de créer l'article ${article} : ${errorMessage}`),
+      next:(newArticle)=> console.log(`Article ${newArticle} créé avec succès !`),
+      complete:()=>console.log('Création du nouvel article terminée avec succès !')
+      
+    });
     this.showList=true;
 
   }
   handleDelete(idArticle:number){
-    console.log("Suppression ->app : " + idArticle);
-    this.updateArticle(idArticle);
+    this.articleService.delete(idArticle).subscribe({
+      complete : ()=>console.log(`Article de l'id : ${idArticle} supprimé avec succès`),
+      error : (message)=>console.log(`Impossible de supprimer l'article de l'id : ${idArticle}`)
+    })
+
+
   }
   showEdit(idArticle:number){
+    this.articleService.read(idArticle).subscribe((article)=>{
+      this.editArticle=article; 
+      this.showList=false
+    })
     console.log("Edit ->app id : " + idArticle);
     this.editArticle = this.articles.find((a)=>a.id===idArticle);
     this.showList=false;
   }
   handleEdit(article:Article){
-    console.log("Edit ->appHandle article : " + article);
-    this.updateArticle(article.id,article);
-    this.editArticle=undefined;
+    this.articleService.update(article).subscribe({
+      complete : ()=>console.log(`Article de l'id : ${article} mis à jour avec succès`),
+      error : (message)=>console.log(`Impossible de mettre à jour l'article de l'id : ${article}`)
+    })
     this.showList=true;
   }
 

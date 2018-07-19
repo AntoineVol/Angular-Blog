@@ -1,14 +1,17 @@
-<form #blogForm=ngForm class="container-fluid" (ngSubmit)="submit(blogForm)">
+<form #blogForm=ngForm class="container" [ngClass]="{'was-validated' : blogForm.submitted}" (ngSubmit)="blogForm.valid && submit(blogForm)">
   <legend>Ajouter un article</legend>
   <hr>
   <div class="Form-group">
     <label for="title">Titre de l'article</label>
-    <input type="text" name="title" id="title" [(ngModel)]="model.title" class="form-control" placeholder="Nom de l'aventurier" required/>
+    <input type="text" name="title" id="title" [(ngModel)]="model.title" class="form-control" placeholder="Nom de l'aventurier" required  minlength="2" maxlength="255"/>
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Le titre est obligatoire et doit être de 2 à 255 charactères</div>
   </div>
   <div class="Form-group">
     <label for="content">Contenu</label>
     <textarea name="content" id="content" [(ngModel)]="model.content" class="form-control" placeholder="Description de l'aventurier" required></textarea>
   </div>
+  <hr>
   <div class="Form-group">
     <button class="btn btn-success">Publier</button>
   </div>
