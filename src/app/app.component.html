@@ -6,13 +6,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="" (click)="showList = !showList">Liste <span class="sr-only">(current)</span></a>
+          <a class="nav-link" [routerLink]="['articles']">Liste <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="" (click)="showList = !showList">Form</a>
+          <a class="nav-link"  [routerLink]="['edit']">Form</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">Contact</a>
+          <a class="nav-link">Contact</a>
         </li>
       </ul>
       <span class="navbar-text">
@@ -28,15 +28,19 @@
     </h1>
   </div>
 </header>
-<!-- Liste des articles -->
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Liste des articles
 <section>
   <app-list-articles [articles]="articles" *ngIf="showList ; else showFormTpl" (onDelete)="handleDelete($event)" (onEdit)="showEdit($event)"></app-list-articles>
 </section>
 
-<!-- Formulaire d'edition -->
+<!-- Formulaire d'edition 
 <ng-template #showFormTpl>
   <app-edit-article [article]="editArticle" (onCreate)="handleCreate($event)" (onEdit)="handleEdit($event)"></app-edit-article>
-</ng-template>
+</ng-template> -->
 
 
 

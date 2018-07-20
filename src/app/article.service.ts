@@ -19,7 +19,7 @@ export class ArticleService {
    }
 
    loadMock(){
-     this.httpClient.get<Array<Article>>(ENV.mockUrl).subscribe((list)=>{this.subject.next(list)})
+    //  this.httpClient.get<Array<Article>>(ENV.mockUrl).subscribe((list)=>{this.subject.next(list)})
    }
 
   list():Observable<Array<Article>>{

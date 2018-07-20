@@ -18,6 +18,7 @@ export class ListArticlesComponent implements OnInit {
    }
 
   ngOnInit() {
+    
   }
 
   delete(article:Article){
@@ -29,7 +30,7 @@ export class ListArticlesComponent implements OnInit {
   
   edit(article:Article){
     if(article!=null && article.id!=null){
-      console.log("Edit ->list-article id : " + article.id);
+      // console.log("Edit ->list-article id : " + article.id);
       this.onEdit.emit(article.id);
     }
   }
